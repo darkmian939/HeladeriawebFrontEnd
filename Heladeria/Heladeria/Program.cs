@@ -1,6 +1,6 @@
-using Heladeria.Data;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Heladeria.Repository;
+using Heladeria.Repository.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,9 +10,9 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddHttpClient();
 
 
-builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
-builder.Services.AddScoped<IAccountRepository, AccountRepository>();
-builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<CustomerRepository, CustomerRepository>();
+builder.Services.AddScoped<AccountRepository, AccountRepository>();
+builder.Services.AddScoped<UserRepository, UserRepository>();
 
 //Agregamos parámetros de autenticación
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
