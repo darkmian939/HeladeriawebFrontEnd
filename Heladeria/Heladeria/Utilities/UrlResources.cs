@@ -7,7 +7,6 @@
         public static string UrlCustomers = "api/Customers/";
 
 
-        public static string UrlUsers = UrlBase + "api/Usuarios/";
 
     }
 }
