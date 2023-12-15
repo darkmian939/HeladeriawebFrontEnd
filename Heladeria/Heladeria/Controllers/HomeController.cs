@@ -5,6 +5,8 @@ using System.Diagnostics;
 using System.Security.Claims;
 using Heladeria.Models;
 using Heladeria.Utilities;
+using WebApplicationBilling.Controllers;
+using Microsoft.AspNetCore.Http;
 
 namespace Heladeria.Controllers
 {
@@ -38,7 +40,7 @@ namespace Heladeria.Controllers
             return View(usuario);
         }
 
-        public async Task<IActionResult> Login(UserLoginDTO obj)
+        public async Task<IActionResult> Login(UserLoginDTO obj, ClaimTypes claimTypes)
         {
             if (ModelState.IsValid)
             {
@@ -52,7 +54,7 @@ namespace Heladeria.Controllers
                 // Crear identidad y principal solo si el token es exitoso
                 var claims = new List<Claim>
         {
-            new Claim(ClaimTypes.Name, objUser.User.UserName)
+            new Claim(claimTypes.Name,objUser.User.UserName)
             // Puedes agregar más claims según sea necesario
         };
 
@@ -61,7 +63,7 @@ namespace Heladeria.Controllers
                 var principal = new ClaimsPrincipal(identity);
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
 
-                HttpContext.Session.SetString("JWToken", objUser.Token);
+                HttpContext.Session.SetString("JWToken", (string)objUser.Token);
                 TempData["alert"] = "Bienvenido/a " + objUser.User.UserName;
                 return RedirectToAction("Index");
             }

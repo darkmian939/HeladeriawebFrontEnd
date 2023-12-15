@@ -24,7 +24,7 @@ namespace Heladeria.Controllers
         }
 
 
-        public async Task<IActionResult> GetAllCustomers()
+        public async Task<IActionResult> GetAll()
         {
             try
             {
