@@ -1,5 +1,4 @@
-using Heladeria.Repository;
-using Heladeria.Repository.Interfaces;
+using Heladeria.RepositoryInterfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,7 +8,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddHttpClient();
 
 
-builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
+builder.Services.AddScoped<CustomerRepository, CustomerRepository>();
 
 
 var app = builder.Build();

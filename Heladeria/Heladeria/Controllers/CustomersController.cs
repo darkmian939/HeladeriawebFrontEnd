@@ -6,12 +6,12 @@ using Heladeria.Utilities;
 
 namespace Heladeria.Controllers
 {
-    public class CustomerController : Controller
+    public class CustomersController : Controller
     {
         private readonly ICustomerRepository _customerRepository;
 
 
-        public CustomerController(ICustomerRepository customerRepository)
+        public CustomersController(ICustomerRepository customerRepository)
         {
             this._customerRepository = customerRepository;
         }
@@ -24,7 +24,7 @@ namespace Heladeria.Controllers
         }
 
 
-        public async Task<IActionResult> GetAllCustomers()
+        public async Task<IActionResult> GetAll()
         {
             try
             {
@@ -40,9 +40,15 @@ namespace Heladeria.Controllers
         }
 
         // GET: CustomersController/Details/5
-        public ActionResult Details(int id) //Pendiente. Reto para el aprendiz
+        public async Task<IActionResult> Details(int id) //Pendiente. Reto para el aprendiz
         {
-            return View();
+
+            var customer = await _customerRepository.GetByIdAsync(UrlResources.UrlBase + UrlResources.UrlCustomers, id);
+            if (customer == null)
+            {
+                return Json(new { success = false, message = "Cliente no encontrado." });
+            }
+            return View(customer);
         }
 
         // GET: CustomersController/Create
@@ -85,6 +91,8 @@ namespace Heladeria.Controllers
 
         // POST: CustomersController/Edit/5
         [HttpPost]
+        //[Authorize(Roles = "admin, registrado")]
+        //[AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(CustomerDTO customer)
         {
@@ -97,7 +105,7 @@ namespace Heladeria.Controllers
             return View();
         }
 
-
+        [Authorize(Roles = "admin")]
         [HttpDelete]
         public async Task<IActionResult> Delete(int id)
         {
