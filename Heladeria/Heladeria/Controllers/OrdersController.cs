@@ -1,11 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Heladeria.Models.DTO;
-using Heladeria.Repository;
 using Heladeria.Repository.Interfaces;
 using Heladeria.Utilities;
-using Heladeriag.Repository;
-using global::Heladeria.Utilities;
 
 namespace Heladeria.Controllers
 {
@@ -89,7 +85,7 @@ namespace Heladeria.Controllers
         {
             if (ModelState.IsValid)
             {
-                await _orderRepository.UpdateAsync(UrlResources.UrlBase + UrlResources.UrlCustomers + order.Id, order);
+                await _orderRepository.UpdateAsync(UrlResources.UrlBase + UrlResources.UrlOrders + order.Id, order);
                 return RedirectToAction(nameof(Index));
             }
 
