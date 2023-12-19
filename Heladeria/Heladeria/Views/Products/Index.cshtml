@@ -1,0 +1,19 @@
+﻿﻿@{
+    ViewData["Title"] = "List of Products";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Lista de Productos</h2>
+<br />
+<div class="col-6">
+    <a asp-action="Create" class="btn btn-primary text-white">Crear nuevo Producto</a>
+</div>
+<br />
+<div id="productsContainer">
+    <!-- Los productos se mostrarán aquí -->
+</div>
+
+
+@section Scripts {
+    <script src="~/js/product.js"></script>
+}

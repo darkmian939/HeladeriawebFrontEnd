@@ -1,0 +1,19 @@
+﻿﻿@{
+    ViewData["Title"] = "List of Orders";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Lista de Ordenes</h2>
+<br />
+<div class="col-6">
+    <a asp-action="Create" class="btn btn-primary text-white">Crear nueva orden</a>
+</div>
+<br />
+<div id="ordersContainer">
+    <!-- Los clientes se mostrarán aquí -->
+</div>
+
+
+@section Scripts {
+    <script src="~/js/order.js"></script>
+}
